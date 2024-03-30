@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Shouldly;
 using Xunit;
 
@@ -6,17 +7,30 @@ namespace LocalIds.Test;
 public class LocalIdTests
 {
     [Fact]
-    public void NewId()
+    public void NewId_WithKnownSeed_ProducesKnownString()
+    {
+        LocalId.NewId(12345678).ToString()
+            .ShouldBe("JgXJG02KMvHc9xv5V");
+    }
+
+    [Fact]
+    public void NewId_Length_IncludesCheckDigit()
     {
         var idString = LocalId.NewId().ToString();
         idString.Length.ShouldBe(LocalId.ByteCount + 1);
     }
 
     [Fact]
-    public void NewId_WithKnownSeed_ProducesKnownString()
+    public void NewId_PerformanceTest()
     {
-        LocalId.NewId(12345678).ToString()
-            .ShouldBe("JgXJG02KMvHc9xv5V");
+        var sw = new Stopwatch();
+        sw.Start();
+        for (var i = 0; i < 1000000; i++)
+        {
+            LocalId.NewId();
+        }
+        sw.Stop();
+        sw.ElapsedMilliseconds.ShouldBeLessThan(300);
     }
 
     [Theory]
