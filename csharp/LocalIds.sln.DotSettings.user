@@ -3,6 +3,6 @@
 	<s:String x:Key="/Default/Environment/Hierarchy/Build/BuildTool/DotNetCliExePath/@EntryValue">/Users/michael/.local/share/rtx/installs/dotnet/8.0.203/dotnet</s:String>
 	<s:Boolean x:Key="/Default/Environment/Hierarchy/Build/BuildTool/RecentDotNetCliExePaths/=_002FUsers_002Fmichael_002F_002Elocal_002Fshare_002Frtx_002Finstalls_002Fdotnet_002F8_002E0_002E203_002Fdotnet/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=2087b9c1_002Defde_002D4d4a_002D95ca_002D61ac1118a046/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;LocalIds.Test&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;Project Location="/Users/michael/dev/local-ids/LocalIds/LocalIds.Test" Presentation="&amp;lt;LocalIds.Test&amp;gt;" /&gt;
+  &lt;Project Location="/Users/michael/dev/local-ids/csharp/LocalIds.Test" Presentation="&amp;lt;LocalIds.Test&amp;gt;" /&gt;
 &lt;/SessionState&gt;</s:String>
 	</wpf:ResourceDictionary>

@@ -48,8 +48,15 @@ public class LocalId
 
     public override string ToString() => _stringId;
 
+    /// <summary>
+    /// Validate if a string is a valid <c>LocalId</c>.
+    /// </summary>
+    /// <param name="idString"></param>
+    /// <returns></returns>
     public static bool IsValid(string idString)
     {
+        if (idString.Length != CharacterCount) return false;
+
         var sum = 0;
         for (var idx = 0; idx < idString.Length - 1; ++idx)
         {
