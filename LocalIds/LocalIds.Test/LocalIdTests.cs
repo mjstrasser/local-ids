@@ -54,21 +54,27 @@ public class LocalIdTests
     }
 
     [Fact]
-    public void IsValid_WithInvalidChar_ReturnsFalse()
+    public void IsValid_WithInvalidCharacters_ReturnsFalse()
     {
         LocalId.IsValid("$%*").ShouldBeFalse();
     }
 
-    [Fact]
-    public void IsValue_WithCorrectCheck_ReturnsTrue()
+    [Theory]
+    [InlineData("mfaPDeiufLqr1aGZ")]
+    [InlineData("HKmTDjG8GWCPT8KX")]
+    [InlineData("m8WPeKKHiD19q1Po")]
+    public void IsValue_WithCorrectCheckCharacter_ReturnsTrue(string stringId)
     {
-        LocalId.IsValid("HeXHG00KKvHa9vvU").ShouldBeTrue();
+        LocalId.IsValid(stringId).ShouldBeTrue();
     }
 
-    [Fact]
-    public void IsValue_WithIncorrectCheck_ReturnsFalse()
+    [Theory]
+    [InlineData("mfaPDeiufLqr1aGY")]
+    [InlineData("HKmTDjG8GWCPT8KY")]
+    [InlineData("m8WPeKKHiD19q1Pq")]
+    public void IsValue_WithIncorrectCheckCharacter_ReturnsFalse(string stringId)
     {
-        LocalId.IsValid("HeXHG00KKvHa9vvX").ShouldBeFalse();
+        LocalId.IsValid(stringId).ShouldBeFalse();
     }
 
     [Theory]
