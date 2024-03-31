@@ -17,16 +17,16 @@ namespace LocalIds;
 /// value, derived from the first 15. Examples are <c>"r0Se8CPG1W4jGji3"</c>
 /// and <c>"Tv0CmWbK4PH5yyrW"</c>.
 /// </para>
-/// <para>
+/// <example>
 /// To create a <c>LocalId</c>:
 /// <code>
-///     var id = LocalId.NewId();
+/// var id = LocalId.NewId();
 /// </code>
-/// You can specify a random number seed with:
+/// Specify a random number seed with:
 /// <code>
-///     var id = LocalId.NewId(seed);
+/// var id = LocalId.NewId(seed);
 /// </code>
-/// </para>
+/// </example>
 /// </summary>
 public class LocalId
 {
