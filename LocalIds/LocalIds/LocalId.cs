@@ -11,7 +11,7 @@ public class LocalId
 
     private LocalId(Random rnd)
     {
-        _bytes = new byte[CharacterCount];
+        _bytes = new byte[CharacterCount - 1];
         rnd.NextBytes(_bytes);
     }
 
@@ -40,7 +40,7 @@ public class LocalId
 
     private string AsBase64()
     {
-        var builder = new StringBuilder(CharacterCount + 1);
+        var builder = new StringBuilder(CharacterCount);
 
         var sum = 0;
         foreach (var b in _bytes)
