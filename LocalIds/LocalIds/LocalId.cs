@@ -2,6 +2,32 @@
 
 namespace LocalIds;
 
+/// <summary>
+/// <para>
+/// A random ID that is very highly likely to be locally unique.
+/// </para>
+/// <para>
+/// Its string representation is 16 characters long in base 62,
+/// using only <c>0</c> to <c>9</c>, <c>A</c> to <c>Z</c>
+/// and <c>a</c> to <c>z</c>. This corresponds to approximately
+/// 90 bits of information (cf. 128 bits for a GUID).
+///</para>
+/// <para>
+/// The first 15 characters are random and the 16th is a check
+/// value, derived from the first 15. Examples are <c>"r0Se8CPG1W4jGji3"</c>
+/// and <c>"Tv0CmWbK4PH5yyrW"</c>.
+/// </para>
+/// <para>
+/// To create a <c>LocalId</c>:
+/// <code>
+///     var id = LocalId.NewId();
+/// </code>
+/// You can specify a random number seed with:
+/// <code>
+///     var id = LocalId.NewId(seed);
+/// </code>
+/// </para>
+/// </summary>
 public class LocalId
 {
     public const int CharacterCount = 16;
