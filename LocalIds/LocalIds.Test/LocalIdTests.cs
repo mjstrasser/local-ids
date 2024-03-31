@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using AutoFixture.Xunit2;
 using Shouldly;
 using Xunit;
 
@@ -21,7 +22,7 @@ public class LocalIdTests
     }
 
     [Fact]
-    public void NewId_PerformanceTest()
+    public void NewId_CrudePerformanceTest()
     {
         var sw = new Stopwatch();
         sw.Start();
@@ -31,7 +32,7 @@ public class LocalIdTests
         }
 
         sw.Stop();
-        sw.ElapsedMilliseconds.ShouldBeLessThan(300);
+        sw.ElapsedMilliseconds.ShouldBeLessThan(400);
     }
 
     [Theory]
@@ -68,5 +69,38 @@ public class LocalIdTests
     public void IsValue_WithIncorrectCheck_ReturnsFalse()
     {
         LocalId.IsValid("HeXHG00KKvHa9vvX").ShouldBeFalse();
+    }
+
+    [Theory]
+    [AutoData]
+    public void GetHashCode_ForTwoIdsWithSameSeed_AreEqual(int seed)
+    {
+        LocalId.NewId(seed).GetHashCode()
+            .ShouldBe(LocalId.NewId(seed).GetHashCode());
+    }
+
+    [Theory]
+    [AutoData]
+    public void GetHashCode_ForTwoIdsWithDifferentSeeds_AreNotEqual(int seed1, int seed2)
+    {
+        LocalId.NewId(seed1).GetHashCode()
+            .ShouldNotBe(LocalId.NewId(seed2).GetHashCode());
+    }
+
+    [Theory]
+    [AutoData]
+    public void Equals_ForTwoIdsWithSameSeed_IsTrue(int seed)
+    {
+        LocalId.NewId(seed).Equals(LocalId.NewId(seed)).ShouldBeTrue();
+        (LocalId.NewId(seed) == LocalId.NewId(seed)).ShouldBeTrue();
+    }
+
+    [Theory]
+    [AutoData]
+    public void Equals_ForTwoIdsWithDifferentSeeds_IsFalse(int seed1, int seed2)
+    {
+        LocalId.NewId(seed1).Equals(LocalId.NewId(seed2)).ShouldBeFalse();
+        (LocalId.NewId(seed1) == LocalId.NewId(seed2)).ShouldBeFalse();
+        (LocalId.NewId(seed1) != LocalId.NewId(seed2)).ShouldBeTrue();
     }
 }

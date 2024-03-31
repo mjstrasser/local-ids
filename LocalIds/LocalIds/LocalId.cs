@@ -39,6 +39,27 @@ public class LocalId
         return idString.Last() == SixtyTwoChars[sum % SixtyTwo];
     }
 
+    public override int GetHashCode()
+    {
+        return _stringId.GetHashCode();
+    }
+
+    public override bool Equals(object? obj) => Equals(obj as LocalId);
+
+    public static bool operator ==(LocalId? lhs, LocalId? rhs)
+    {
+        if (lhs is not null) return lhs.Equals(rhs);
+        return rhs is null;
+    }
+
+    public static bool operator !=(LocalId? lhs, LocalId? rhs) => !(lhs == rhs);
+
+    private bool Equals(LocalId? other)
+    {
+        return other is not null &&
+               (ReferenceEquals(this, other) || _stringId.Equals(other._stringId));
+    }
+
     private static string AsBase62(IEnumerable<byte> bytes)
     {
         var builder = new StringBuilder(CharacterCount);
