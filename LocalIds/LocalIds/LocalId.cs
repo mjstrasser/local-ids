@@ -4,14 +4,14 @@ namespace LocalIds;
 
 public class LocalId
 {
-    public const int ByteCount = 16;
+    public const int CharacterCount = 16;
     private const byte SixtyTwo = 0x3D;
 
     private readonly byte[] _bytes;
 
     private LocalId(Random rnd)
     {
-        _bytes = new byte[ByteCount];
+        _bytes = new byte[CharacterCount];
         rnd.NextBytes(_bytes);
     }
 
@@ -21,9 +21,26 @@ public class LocalId
 
     public override string ToString() => AsBase64();
 
+    public static bool IsValid(string idString)
+    {
+        var sum = 0;
+        for (var idx = 0; idx < idString.Length - 1; ++idx)
+        {
+            var idx62 = Array.FindIndex(SixtyTwoChars, c => c == idString[idx]);
+            if (idx62 == -1)
+            {
+                return false;
+            }
+
+            sum += idx62;
+        }
+
+        return idString.Last() == SixtyTwoChars[sum % SixtyTwo];
+    }
+
     private string AsBase64()
     {
-        var builder = new StringBuilder(ByteCount + 1);
+        var builder = new StringBuilder(CharacterCount + 1);
 
         var sum = 0;
         foreach (var b in _bytes)

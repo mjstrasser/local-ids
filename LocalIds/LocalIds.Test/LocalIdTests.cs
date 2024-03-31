@@ -17,7 +17,7 @@ public class LocalIdTests
     public void NewId_Length_IncludesCheckDigit()
     {
         var idString = LocalId.NewId().ToString();
-        idString.Length.ShouldBe(LocalId.ByteCount + 1);
+        idString.Length.ShouldBe(LocalId.CharacterCount + 1);
     }
 
     [Fact]
@@ -29,6 +29,7 @@ public class LocalIdTests
         {
             LocalId.NewId();
         }
+
         sw.Stop();
         sw.ElapsedMilliseconds.ShouldBeLessThan(300);
     }
@@ -49,5 +50,23 @@ public class LocalIdTests
     public void LowSixBitsToBase62(byte bite, char car)
     {
         bite.LowSixBitsToBase62().ShouldBe(car);
+    }
+
+    [Fact]
+    public void IsValid_WithInvalidChar_ReturnsFalse()
+    {
+        LocalId.IsValid("$%*").ShouldBeFalse();
+    }
+
+    [Fact]
+    public void IsValue_WithCorrectCheck_ReturnsTrue()
+    {
+        LocalId.IsValid("HeXHG00KKvHa9vv5Z").ShouldBeTrue();
+    }
+
+    [Fact]
+    public void IsValue_WithIncorrectCheck_ReturnsFalse()
+    {
+        LocalId.IsValid("HeXHG00KKvHa9vv5Y").ShouldBeFalse();
     }
 }
