@@ -5,9 +5,9 @@ namespace LocalIds;
 public class LocalId
 {
     public const int ByteCount = 16;
-    private const byte SixBitMask = 0x3F;
+    private const byte SixtyTwo = 0x3D;
 
-    private readonly Byte[] _bytes;
+    private readonly byte[] _bytes;
 
     private LocalId(Random rnd)
     {
@@ -15,9 +15,9 @@ public class LocalId
         rnd.NextBytes(_bytes);
     }
 
-    public static LocalId NewId() => new LocalId(new Random());
+    public static LocalId NewId() => new(new Random());
 
-    public static LocalId NewId(int randomSeed) => new LocalId(new Random(randomSeed));
+    public static LocalId NewId(int randomSeed) => new(new Random(randomSeed));
 
     public override string ToString() => AsBase64();
 
@@ -28,16 +28,16 @@ public class LocalId
         var sum = 0;
         foreach (var b in _bytes)
         {
-            var sixBits = b & SixBitMask;
-            builder.Append(Base64Chars[sixBits]);
+            var sixBits = b & SixtyTwo;
+            builder.Append(SixtyTwoChars[sixBits]);
             sum += sixBits;
         }
 
-        builder.Append(Base64Chars[sum % 64]);
+        builder.Append(SixtyTwoChars[sum % SixtyTwo]);
         return builder.ToString();
     }
 
-    private static readonly char[] Base64Chars =
+    private static readonly char[] SixtyTwoChars =
     [
         '0', '1', '2', '3', '4', '5', '6', '7',
         '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
@@ -46,6 +46,6 @@ public class LocalId
         'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd',
         'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
         'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-        'u', 'v', 'w', 'x', 'y', 'z', '-', '_'
+        'u', 'v', 'w', 'x', 'y', 'z',
     ];
 }
