@@ -7,19 +7,20 @@ public class LocalId
     public const int CharacterCount = 16;
     private const byte SixtyTwo = 0x3D;
 
-    private readonly byte[] _bytes;
+    private readonly string _stringId;
 
     private LocalId(Random rnd)
     {
-        _bytes = new byte[CharacterCount - 1];
-        rnd.NextBytes(_bytes);
+        var bytes = new byte[CharacterCount - 1];
+        rnd.NextBytes(bytes);
+        _stringId = AsBase62(bytes);
     }
 
     public static LocalId NewId() => new(new Random());
 
     public static LocalId NewId(int randomSeed) => new(new Random(randomSeed));
 
-    public override string ToString() => AsBase64();
+    public override string ToString() => _stringId;
 
     public static bool IsValid(string idString)
     {
@@ -38,16 +39,16 @@ public class LocalId
         return idString.Last() == SixtyTwoChars[sum % SixtyTwo];
     }
 
-    private string AsBase64()
+    private static string AsBase62(IEnumerable<byte> bytes)
     {
         var builder = new StringBuilder(CharacterCount);
 
         var sum = 0;
-        foreach (var b in _bytes)
+        foreach (var b in bytes)
         {
-            var sixBits = b & SixtyTwo;
-            builder.Append(SixtyTwoChars[sixBits]);
-            sum += sixBits;
+            var max62 = b & SixtyTwo;
+            builder.Append(SixtyTwoChars[max62]);
+            sum += max62;
         }
 
         builder.Append(SixtyTwoChars[sum % SixtyTwo]);
