@@ -1,5 +1,8 @@
 namespace LocalIds;
 
+/// <summary>
+/// Extensions class used by tests of base-62 encoding.
+/// </summary>
 public static class ByteExtensions
 {
     private const byte SixtyTwo = 0x3F;
