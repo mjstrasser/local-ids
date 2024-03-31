@@ -39,4 +39,4 @@ check on the preceding 15.
 - Compact string representation using only letters and numbers.
 - Sufficient random space to be unique enough for most uses.
 - Validity check to catch guessing attempts without needing to query existing values in a database (for example, if
-  used to generate links like `https//example.com/l/WLqW9rCvPaS9PHeL`).
+  used to generate links like `https://example.com/l/WLqW9rCvPaS9PHeL`).
