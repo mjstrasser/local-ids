@@ -85,8 +85,7 @@ public class LocalIdTests
         LocalId.IsValid(stringId).ShouldBeFalse();
     }
 
-    [Theory]
-    [AutoData]
+    [Theory, AutoData]
     public void GetHashCode_ForTwoIdsWithSameSeed_AreEqual(int seed)
     {
         var localId1 = LocalId.NewId(seed);
@@ -95,8 +94,7 @@ public class LocalIdTests
         localId1.GetHashCode().ShouldBe(localId2.GetHashCode());
     }
 
-    [Theory]
-    [AutoData]
+    [Theory, AutoData]
     public void GetHashCode_ForTwoIdsWithDifferentSeeds_AreNotEqual(int seed1, int seed2)
     {
         var localId1 = LocalId.NewId(seed1);
@@ -105,8 +103,7 @@ public class LocalIdTests
         localId1.GetHashCode().ShouldNotBe(localId2.GetHashCode());
     }
 
-    [Theory]
-    [AutoData]
+    [Theory, AutoData]
     public void Equals_ForTwoIdsWithSameSeed_IsTrue(int seed)
     {
         var localId1 = LocalId.NewId(seed);
@@ -116,8 +113,7 @@ public class LocalIdTests
         (localId1 == localId2).ShouldBeTrue();
     }
 
-    [Theory]
-    [AutoData]
+    [Theory, AutoData]
     public void Equals_ForTwoIdsWithDifferentSeeds_IsFalse(int seed1, int seed2)
     {
         var localId1 = LocalId.NewId(seed1);
