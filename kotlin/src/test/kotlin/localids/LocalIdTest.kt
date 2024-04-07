@@ -1,10 +1,12 @@
 package localids
 
+import io.kotest.assertions.fail
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.data.forAll
 import io.kotest.matchers.comparables.shouldBeLessThan
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
+import kotlin.io.path.Path
 import kotlin.time.measureTimedValue
 
 class LocalIdTest : DescribeSpec({
@@ -39,6 +41,18 @@ class LocalIdTest : DescribeSpec({
         it("returns false if the check character is incorrect") {
             LocalId.isValid("OW0Pu5HTzjLDCWjP") shouldBe false
             LocalId.isValid("fPqrufrjTnHunOfq") shouldBe false
+        }
+        it("returns true for many values from a file") {
+            val gradleUserDir = System.getProperty("user.dir")
+            val ids = gradleUserDir?.let { userDir ->
+                Path(userDir, "../valid-ids.txt")
+                    .toFile()
+                    .readLines()
+            }
+            if (ids == null) fail("valid-ids.txt not found")
+            for (id in ids) {
+                LocalId.isValid(id) shouldBe true
+            }
         }
     }
 
