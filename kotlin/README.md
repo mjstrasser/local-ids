@@ -1,4 +1,4 @@
-# `LocalId`: a local ID in C#
+# `LocalId`: a local ID in Kotlin
 
 `LocalId` is designed to have a compact string representation using 16 base-62 characters.
 Base 62 comprises only English alphabetic characters and numerals (i.e. `[0-9A-Z-a-z]`).
@@ -8,30 +8,30 @@ Example string values are: `4Gje9T9KrGK11L4i`, `WLqW9rCvPaS9PHeL`, `r8HT108iS4C1
 
 Each ID has 15 characters of random data and one check character, derived from the first 15.
 
-This provides an approximately 90-bit random space. (For comparison, UUIDs or GUIDs are
+This provides an approximately 90-bit random space. (For comparison, UUIDs are
 random in 128-bit space.)
 
 ## Create a `LocalId`
 
 To create a `LocalId`:
 
-```csharp
+```kotlin
     // Random ID.
-    var randomId = LocalId.NewId();
+    val randomId = LocalId.newId()
     
     // Random ID, supplying a seed (for testing).
-    var seededId = LocalId.NewId(randomSeed);
+    var seededId = LocalId.newId(randomSeed)
 ```
 
 ## Check validity
 
-The static method `LocalId.IsValid()` returns `false` if the string is
+The static method `LocalId.isValid()` returns `false` if the string is
 the wrong length, contains invalid characters, or if the last character is not a correct
 check on the preceding 15.
 
-```csharp
-    LocalId.IsValid("r8HT108iS4C1b402") // true
-    LocalId.IsValid("r8HT108iS4C1b403") // false
+```kotlin
+    LocalId.isValid("r8HT108iS4C1b402") // true
+    LocalId.isValid("r8HT108iS4C1b403") // false
 ```
 
 ## Design goals
