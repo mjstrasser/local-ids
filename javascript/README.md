@@ -1,4 +1,4 @@
-# `LocalId`: a local ID in Kotlin
+# `LocalId`: a local ID in JavaScript
 
 `LocalId` is designed to have a compact string representation using 16 base-62 characters.
 Base 62 comprises only English alphabetic characters and numerals (i.e. `[0-9A-Z-a-z]`).
@@ -15,12 +15,9 @@ random in 128-bit space.)
 
 To create a `LocalId`:
 
-```kotlin
+```javascript
     // Random ID.
-    val randomId = LocalId.newId()
-    
-    // Random ID, supplying a seed (for testing).
-    val seededId = LocalId.newId(randomSeed)
+    let randomId = LocalId.newId()
 ```
 
 ## Check validity
@@ -29,7 +26,7 @@ The static method `LocalId.isValid()` returns `false` if the string is
 the wrong length, contains invalid characters, or if the last character is not a correct
 check on the preceding 15.
 
-```kotlin
+```javascript
     LocalId.isValid("r8HT108iS4C1b402") // true
     LocalId.isValid("r8HT108iS4C1b403") // false
 ```

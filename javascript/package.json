@@ -1,0 +1,14 @@
+{
+  "name": "local-ids",
+  "version": "1.0.0",
+  "description": "Create random local IDs",
+  "main": "local-id.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Michael Strasser <michael@michaelstrasser.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
