@@ -29,6 +29,18 @@ class LocalId private constructor(random: Random) {
 
         fun newId(): LocalId = LocalId(Random.Default)
         fun newId(seed: Long): LocalId = LocalId(Random(seed))
+
+        fun isValid(stringId: String): Boolean {
+            if (stringId.length != CHARACTER_COUNT) return false
+            var sum = 0
+            for (ch in stringId.toCharArray().dropLast(1)) {
+                if (!sixtyTwoCharacters.contains(ch)) {
+                    return false
+                }
+                sum += sixtyTwoCharacters.indexOf(ch)
+            }
+            return (sum % SixtyTwo) == sixtyTwoCharacters.indexOf(stringId.last())
+        }
     }
 
     private fun asBase62(bytes: ByteArray): String {

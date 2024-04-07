@@ -22,4 +22,21 @@ class LocalIdTest : DescribeSpec({
         }
     }
 
+    describe("LocalId.isValid()") {
+        it("returns false if the string is the wrong length") {
+            LocalId.isValid("yS1ajfPfDm1KKur") shouldBe false
+            LocalId.isValid("yS1ajfPfDm1KKur0X") shouldBe false
+        }
+        it("returns false from invalid characters") {
+            LocalId.isValid("y$1ajfPfDm1KKur0") shouldBe false
+        }
+        it("returns true if the check character is correct") {
+            LocalId.isValid("OW0Pu5HTzjLDCWjp") shouldBe true
+            LocalId.isValid("fPqrufrjTnHunOfL") shouldBe true
+        }
+        it("returns false if the check character is incorrect") {
+            LocalId.isValid("OW0Pu5HTzjLDCWjP") shouldBe false
+            LocalId.isValid("fPqrufrjTnHunOfq") shouldBe false
+        }
+    }
 })
