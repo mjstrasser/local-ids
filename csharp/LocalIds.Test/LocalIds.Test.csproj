@@ -21,4 +21,11 @@
         <ProjectReference Include="..\LocalIds\LocalIds.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="..\..\valid-ids.txt">
+        <Link>valid-ids.txt</Link>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>

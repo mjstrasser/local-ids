@@ -85,6 +85,16 @@ public class LocalIdTests
         LocalId.IsValid(stringId).ShouldBeFalse();
     }
 
+    [Fact]
+    public void IsValid_ReadingValidIDsFromFile_ReturnsTrueForAll()
+    {
+        var ids = File.ReadLines("valid-ids.txt");
+        foreach (var id in ids)
+        {
+            LocalId.IsValid(id).ShouldBeTrue();
+        }
+    }
+
     [Theory, AutoData]
     public void GetHashCode_ForTwoIdsWithSameSeed_AreEqual(int seed)
     {
