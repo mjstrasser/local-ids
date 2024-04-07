@@ -1,8 +1,10 @@
 package localids
 
 import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.data.forAll
 import io.kotest.matchers.comparables.shouldBeLessThan
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
 import kotlin.time.measureTimedValue
 
 class LocalIdTest : DescribeSpec({
@@ -37,6 +39,32 @@ class LocalIdTest : DescribeSpec({
         it("returns false if the check character is incorrect") {
             LocalId.isValid("OW0Pu5HTzjLDCWjP") shouldBe false
             LocalId.isValid("fPqrufrjTnHunOfq") shouldBe false
+        }
+    }
+
+    describe("LocalId.hashCode()") {
+        it("for two IDs with the same seed are equal") {
+            forAll<Long> { seed ->
+                LocalId.newId(seed).hashCode() shouldBe LocalId.newId(seed).hashCode()
+            }
+        }
+        it("for to IDs with different seeds are not equal") {
+            forAll<Long, Long> { seed1, seed2 ->
+                LocalId.newId(seed1).hashCode() shouldNotBe LocalId.newId(seed2).hashCode()
+            }
+        }
+    }
+
+    describe("LocalId.equals()") {
+        it("for two IDs with the same seed are equal") {
+            forAll<Long> { seed ->
+                LocalId.newId(seed) shouldBe LocalId.newId(seed)
+            }
+        }
+        it("for to IDs with different seeds are not equal") {
+            forAll<Long, Long> { seed1, seed2 ->
+                LocalId.newId(seed1) shouldNotBe LocalId.newId(seed2)
+            }
         }
     }
 })
