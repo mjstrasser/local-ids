@@ -13,6 +13,8 @@ jobs:
   build-and-test:
     name: Build and test LocalId in Kotlin
     runs-on: ubuntu-latest
+    env:
+      working-directory: ./kotlin
 
     steps:
       - name: Check out code
