@@ -28,19 +28,21 @@ class LocalIdTest : DescribeSpec({
 
     describe("LocalId.isValid()") {
         it("returns false if the string is the wrong length") {
-            LocalId.isValid("yS1ajfPfDm1KKur") shouldBe false
-            LocalId.isValid("yS1ajfPfDm1KKur0X") shouldBe false
+            LocalId.isValid("0123456789ABCDEFG") shouldBe false
+            LocalId.isValid("0123456789ABCDE") shouldBe false
         }
         it("returns false from invalid characters") {
-            LocalId.isValid("y$1ajfPfDm1KKur0") shouldBe false
+            LocalId.isValid("0123456789ABCDE?") shouldBe false
         }
         it("returns true if the check character is correct") {
-            LocalId.isValid("mur9WvSe5HL1XGTB") shouldBe true
-            LocalId.isValid("vaObv5f1WeOHvrnY") shouldBe true
+            LocalId.isValid("0000000000000000") shouldBe true
+            LocalId.isValid("A00000000000000A") shouldBe true
+            LocalId.isValid("000b00000000000b") shouldBe true
+            LocalId.isValid("000000000X00000X") shouldBe true
+            LocalId.isValid("0123456789ABCDEh") shouldBe true
         }
         it("returns false if the check character is incorrect") {
-            LocalId.isValid("OW0Pu5HTzjLDCWjP") shouldBe false
-            LocalId.isValid("fPqrufrjTnHunOfq") shouldBe false
+            LocalId.isValid("0123456789ABCDEj") shouldBe false
         }
         it("returns true for many values from a file") {
             val gradleUserDir = System.getProperty("user.dir")

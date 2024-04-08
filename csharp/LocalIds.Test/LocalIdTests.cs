@@ -8,17 +8,17 @@ namespace LocalIds.Test;
 public class LocalIdTests
 {
     [Fact]
-    public void NewId_WithKnownSeed_ProducesKnownString()
-    {
-        LocalId.NewId(12345678).ToString()
-            .ShouldBe("HeXHG00KKvHa9vvO");
-    }
-
-    [Fact]
     public void NewId_Length_IncludesCheckDigit()
     {
         var idString = LocalId.NewId().ToString();
         idString.Length.ShouldBe(LocalId.CharacterCount);
+    }
+
+    [Fact]
+    public void NewId_WithKnownSeed_ProducesKnownString()
+    {
+        LocalId.NewId(12345678).ToString()
+            .ShouldBe("HeXHG00KKvHa9vvO");
     }
 
     [Fact]
@@ -53,18 +53,18 @@ public class LocalIdTests
         bite.LowSixBitsToBase62().ShouldBe(car);
     }
 
-    [Fact]
-    public void IsValid_WithInvalidCharacters_ReturnsFalse()
-    {
-        LocalId.IsValid("H?mTDjG8GWCPT8KX").ShouldBeFalse();
-    }
-
     [Theory]
-    [InlineData("mfaPDeiufLqr")]
-    [InlineData("m8WPeKKHiD19q1PoQ")]
+    [InlineData("0123456789ABCDE")]
+    [InlineData("0123456789ABCDEFG")]
     public void IsValid_WithWrongNumberOfCharacters_ReturnsFalse(string stringId)
     {
         LocalId.IsValid(stringId).ShouldBeFalse();
+    }
+
+    [Fact]
+    public void IsValid_WithInvalidCharacters_ReturnsFalse()
+    {
+        LocalId.IsValid("0123456789ABCDE?").ShouldBeFalse();
     }
 
     [Theory]
@@ -73,18 +73,17 @@ public class LocalIdTests
     [InlineData("000b00000000000b")]
     [InlineData("000000000X00000X")]
     [InlineData("0123456789ABCDEh")]
-    [InlineData("rGuruaaiCb5Gqj8T")]
-    [InlineData("LPvT0PbmWL5yyLGN")]
-    [InlineData("5ubHKLbvPTafDnnw")]
     public void IsValid_WithCorrectCheckCharacter_ReturnsTrue(string stringId)
     {
         LocalId.IsValid(stringId).ShouldBeTrue();
     }
 
     [Theory]
-    [InlineData("mfaPDeiufLqr1aGY")]
-    [InlineData("HKmTDjG8GWCPT8KY")]
-    [InlineData("m8WPeKKHiD19q1Pq")]
+    [InlineData("000000000000000A")]
+    [InlineData("A00000000000000B")]
+    [InlineData("000b00000000000c")]
+    [InlineData("000000000X00000Y")]
+    [InlineData("0123456789ABCDEi")]
     public void IsValid_WithIncorrectCheckCharacter_ReturnsFalse(string stringId)
     {
         LocalId.IsValid(stringId).ShouldBeFalse();

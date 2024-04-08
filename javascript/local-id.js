@@ -5,14 +5,14 @@ function newId() {
 }
 
 function asBase62(bytes) {
-    let id = ""
+    let stringId = ""
     let sum = 0;
     for (let i = 0; i < bytes.length; i += 1) {
         let max62 = bytes[i] & SIXTY_TWO;
-        id += SIXTY_TWO_CHARS[max62];
+        stringId += SIXTY_TWO_CHARS[max62];
         sum += max62
     }
-    return id + SIXTY_TWO_CHARS[sum & SIXTY_TWO];
+    return stringId + SIXTY_TWO_CHARS[sum & SIXTY_TWO];
 }
 
 function isValid(stringId) {

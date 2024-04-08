@@ -17,15 +17,20 @@ describe('newId()', () => {
 
 describe('isValid()', () => {
     test('returns false if the string is the wrong length', () => {
-        expect(LocalId.isValid("P5O5bH8Hbnm9f4i")).toBe(false);
+        expect(LocalId.isValid("0123456789ABCDEFG")).toBe(false);
+        expect(LocalId.isValid("0123456789ABCDE")).toBe(false);
     });
     test('returns false if the string contains invalid characters', () => {
-        expect(LocalId.isValid("@COCqGLPDiCfWeOc")).toBe(false);
+        expect(LocalId.isValid("0123456789ABCDE?")).toBe(false);
     });
     test('returns true if the check character is correct', () => {
-        expect(LocalId.isValid("zKy8DqCjTyaiKiSi")).toBe(false);
+        expect(LocalId.isValid("0000000000000000")).toBe(true);
+        expect(LocalId.isValid("A00000000000000A")).toBe(true);
+        expect(LocalId.isValid("000b00000000000b")).toBe(true);
+        expect(LocalId.isValid("000000000X00000X")).toBe(true);
+        expect(LocalId.isValid("0123456789ABCDEh")).toBe(true);
     });
     test('returns false if the check character is incorrect', () => {
-        expect(LocalId.isValid("zKy8DqCjTyaiKiSj")).toBe(false);
+        expect(LocalId.isValid("0123456789ABCDEj")).toBe(false);
     });
 });
