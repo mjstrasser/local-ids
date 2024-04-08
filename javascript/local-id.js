@@ -4,15 +4,18 @@ function newId() {
     return asBase62(bytes);
 }
 
+const SIXTY_ONE = 61;
+const SIXTY_TWO = 62;
+
 function asBase62(bytes) {
     let stringId = ""
     let sum = 0;
     for (let i = 0; i < bytes.length; i += 1) {
-        let max62 = bytes[i] & SIXTY_TWO;
-        stringId += SIXTY_TWO_CHARS[max62];
-        sum += max62
+        let max61 = bytes[i] & SIXTY_ONE;
+        stringId += SIXTY_TWO_CHARS[max61];
+        sum += max61
     }
-    return stringId + SIXTY_TWO_CHARS[sum & SIXTY_TWO];
+    return stringId + SIXTY_TWO_CHARS[sum % SIXTY_TWO];
 }
 
 function isValid(stringId) {
@@ -25,7 +28,6 @@ function isValid(stringId) {
     return (sum % SIXTY_TWO) === SIXTY_TWO_CHARS.indexOf(stringId[stringId.length - 1]);
 }
 
-const SIXTY_TWO = 62;
 const SIXTY_TWO_CHARS = [
     '0', '1', '2', '3', '4', '5', '6', '7',
     '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',

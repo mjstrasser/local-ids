@@ -48,9 +48,9 @@ class LocalId private constructor(random: Random) {
         val builder = StringBuilder()
         var sum = 0
         for (b in bytes) {
-            val max62 = b.toInt() and SixtyOne
-            builder.append(sixtyTwoCharacters[max62])
-            sum += max62
+            val max61 = b.toInt() and SixtyOne
+            builder.append(sixtyTwoCharacters[max61])
+            sum += max61
         }
         builder.append(sixtyTwoCharacters[sum % SixtyTwo])
         return builder.toString()

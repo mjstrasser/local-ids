@@ -33,4 +33,19 @@ describe('isValid()', () => {
     test('returns false if the check character is incorrect', () => {
         expect(LocalId.isValid("0123456789ABCDEj")).toBe(false);
     });
+    test('returns true for many values from a file', () => {
+        const fs = require('fs'),
+            path = require('path'),
+            readline = require('readline');
+
+        const filePath = path.join(__dirname, '../valid-ids.txt');
+        const fileStream = fs.createReadStream(filePath);
+        const rl = readline.createInterface({
+            input: fileStream,
+            crlfDelay: Infinity,
+        });
+        rl.on('line', (stringId) => {
+            expect(LocalId.isValid(stringId)).toBe(true);
+        });
+    });
 });

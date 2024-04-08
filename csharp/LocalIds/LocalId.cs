@@ -101,9 +101,9 @@ public class LocalId
         var sum = 0;
         foreach (var b in bytes)
         {
-            var max62 = b & SixtyOne;
-            builder.Append(SixtyTwoChars[max62]);
-            sum += max62;
+            var max61 = b & SixtyOne;
+            builder.Append(SixtyTwoChars[max61]);
+            sum += max61;
         }
 
         builder.Append(SixtyTwoChars[sum % SixtyTwo]);
