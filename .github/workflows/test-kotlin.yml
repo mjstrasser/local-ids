@@ -28,10 +28,6 @@ jobs:
       - name: Set up Gradle
         uses: gradle/gradle-build-action@v3
 
-      - name: List files
-        run: ls -lR .
-
       - name: Gradle test
+        working-directory: ./kotlin
         run: ./gradlew test
-        env:
-          working-directory: ./kotlin
