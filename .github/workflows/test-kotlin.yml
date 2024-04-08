@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - kotlin
+      - .github/workflows/test-kotlin.yml
   workflow_dispatch:
 
 jobs:
@@ -26,6 +27,9 @@ jobs:
 
       - name: Set up Gradle
         uses: gradle/gradle-build-action@v3
+
+      - name: List files
+        run: ls -lR .
 
       - name: Gradle test
         run: ./gradlew test
