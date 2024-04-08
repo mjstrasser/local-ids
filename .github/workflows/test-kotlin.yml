@@ -1,0 +1,31 @@
+name: Test Kotlin
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - kotlin
+  workflow_dispatch:
+
+jobs:
+
+  build-and-test:
+    name: Build and test LocalId in Kotlin
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Set up Gradle
+        uses: gradle/gradle-build-action@v3
+
+      - name: Gradle test
+        run: ./kotlin/gradlew test
