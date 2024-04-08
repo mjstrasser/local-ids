@@ -1,0 +1,37 @@
+name: Test C#
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - csharp
+      - .github/workflows/test-csharp.yml
+  workflow_dispatch:
+
+jobs:
+
+  build-and-test:
+    name: Build and test LocalId in C#
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8
+
+      - name: Install dependencies
+        working-directory: ./csharp
+        run: dotnet restore
+
+      - name: Build
+        working-directory: ./csharp
+        run: dotnet build
+
+      - name: Test with the dotnet CLI
+        working-directory: ./csharp
+        run: dotnet test
