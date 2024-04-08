@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - kotlin
+      - kotlin/**
       - .github/workflows/test-kotlin.yml
   workflow_dispatch:
 

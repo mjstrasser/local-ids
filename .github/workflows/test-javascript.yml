@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - javascript
+      - javascript/**
       - .github/workflows/test-javascript.yml
   workflow_dispatch:
 
