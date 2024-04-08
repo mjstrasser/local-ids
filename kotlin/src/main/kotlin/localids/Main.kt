@@ -1,7 +1,7 @@
 package localids
 
 fun main() {
-    repeat(10) {
+    repeat(1000) {
         println(LocalId.newId())
     }
 }

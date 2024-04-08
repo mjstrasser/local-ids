@@ -2,7 +2,8 @@ package localids
 
 import kotlin.random.Random
 
-private const val SixtyTwo: Int = 0x3d
+private const val SixtyOne: Int = 0x3d
+private const val SixtyTwo: Int = 0x3e
 
 private val sixtyTwoCharacters: CharArray = charArrayOf(
     '0', '1', '2', '3', '4', '5', '6', '7',
@@ -47,7 +48,7 @@ class LocalId private constructor(random: Random) {
         val builder = StringBuilder()
         var sum = 0
         for (b in bytes) {
-            val max62 = b.toInt() and SixtyTwo
+            val max62 = b.toInt() and SixtyOne
             builder.append(sixtyTwoCharacters[max62])
             sum += max62
         }

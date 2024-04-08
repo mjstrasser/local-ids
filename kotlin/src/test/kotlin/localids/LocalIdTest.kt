@@ -16,7 +16,7 @@ class LocalIdTest : DescribeSpec({
             LocalId.newId().toString().length shouldBe LocalId.CHARACTER_COUNT
         }
         it("with known seed produces known string") {
-            LocalId.newId(123456789).toString() shouldBe "yS1ajfPfDm1KKur0"
+            LocalId.newId(123456789).toString() shouldBe "yS1ajfPfDm1KKurs"
         }
         it("crude performance test") {
             val time = measureTimedValue {
@@ -35,8 +35,8 @@ class LocalIdTest : DescribeSpec({
             LocalId.isValid("y$1ajfPfDm1KKur0") shouldBe false
         }
         it("returns true if the check character is correct") {
-            LocalId.isValid("OW0Pu5HTzjLDCWjp") shouldBe true
-            LocalId.isValid("fPqrufrjTnHunOfL") shouldBe true
+            LocalId.isValid("mur9WvSe5HL1XGTB") shouldBe true
+            LocalId.isValid("vaObv5f1WeOHvrnY") shouldBe true
         }
         it("returns false if the check character is incorrect") {
             LocalId.isValid("OW0Pu5HTzjLDCWjP") shouldBe false
