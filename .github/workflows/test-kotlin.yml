@@ -30,4 +30,4 @@ jobs:
         uses: gradle/gradle-build-action@v3
 
       - name: Gradle test
-        run: ./kotlin/gradlew test
+        run: ./gradlew test
