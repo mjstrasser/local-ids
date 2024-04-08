@@ -18,7 +18,7 @@ public class LocalIdTests
     public void NewId_WithKnownSeed_ProducesKnownString()
     {
         LocalId.NewId(12345678).ToString()
-            .ShouldBe("HeXHG00KKvHa9vvO");
+            .ShouldBe("LkZNK44OOvHcDzvA");
     }
 
     [Fact]
@@ -42,15 +42,15 @@ public class LocalIdTests
     [InlineData(0x23, 'Z')]
     [InlineData(0x24, 'a')]
     [InlineData(0x3D, 'z')]
-    [InlineData(0x40, '0')]
-    [InlineData(0x49, '9')]
-    [InlineData(0x4A, 'A')]
-    [InlineData(0x63, 'Z')]
-    [InlineData(0x64, 'a')]
-    [InlineData(0x7D, 'z')]
-    public void LowSixBitsToBase62(byte bite, char car)
+    [InlineData(0x40, '2')]
+    [InlineData(0x49, 'B')]
+    [InlineData(0x4A, 'C')]
+    [InlineData(0x63, 'b')]
+    [InlineData(0x64, 'c')]
+    [InlineData(0x7D, '1')]
+    public void LowSixBitsToBase62(byte bite, char ch)
     {
-        bite.LowSixBitsToBase62().ShouldBe(car);
+        bite.LowSixBitsToBase62().ShouldBe(ch);
     }
 
     [Theory]
