@@ -31,7 +31,8 @@ namespace LocalIds;
 public class LocalId
 {
     public const int CharacterCount = 16;
-    private const byte SixtyTwo = 0x3D;
+    private const byte SixtyOne = 0x3D;
+    private const byte SixtyTwo = 0x3E;
 
     private readonly string _stringId;
 
@@ -100,7 +101,7 @@ public class LocalId
         var sum = 0;
         foreach (var b in bytes)
         {
-            var max62 = b & SixtyTwo;
+            var max62 = b & SixtyOne;
             builder.Append(SixtyTwoChars[max62]);
             sum += max62;
         }

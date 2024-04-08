@@ -11,7 +11,7 @@ public class LocalIdTests
     public void NewId_WithKnownSeed_ProducesKnownString()
     {
         LocalId.NewId(12345678).ToString()
-            .ShouldBe("HeXHG00KKvHa9vvU");
+            .ShouldBe("HeXHG00KKvHa9vvO");
     }
 
     [Fact]
@@ -68,9 +68,14 @@ public class LocalIdTests
     }
 
     [Theory]
-    [InlineData("mfaPDeiufLqr1aGZ")]
-    [InlineData("HKmTDjG8GWCPT8KX")]
-    [InlineData("m8WPeKKHiD19q1Po")]
+    [InlineData("0000000000000000")]
+    [InlineData("A00000000000000A")]
+    [InlineData("000b00000000000b")]
+    [InlineData("000000000X00000X")]
+    [InlineData("0123456789ABCDEh")]
+    [InlineData("rGuruaaiCb5Gqj8T")]
+    [InlineData("LPvT0PbmWL5yyLGN")]
+    [InlineData("5ubHKLbvPTafDnnw")]
     public void IsValid_WithCorrectCheckCharacter_ReturnsTrue(string stringId)
     {
         LocalId.IsValid(stringId).ShouldBeTrue();
