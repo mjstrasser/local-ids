@@ -16,7 +16,7 @@ class LocalIdTest : DescribeSpec({
             LocalId.newId().toString().length shouldBe LocalId.CHARACTER_COUNT
         }
         it("with known seed produces known string") {
-            LocalId.newId(123456789).toString() shouldBe "yS1ajfPfDm1KKurs"
+            LocalId.newId(123456789).toString() shouldBe "4W7gpjVhDs3OMytq"
         }
         it("crude performance test") {
             val time = measureTimedValue {

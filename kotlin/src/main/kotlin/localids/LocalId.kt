@@ -1,8 +1,8 @@
 package localids
 
 import kotlin.random.Random
+import kotlin.random.nextUBytes
 
-private const val SixtyOne: Int = 0x3d
 private const val SixtyTwo: Int = 0x3e
 
 private val sixtyTwoCharacters: CharArray = charArrayOf(
@@ -16,12 +16,13 @@ private val sixtyTwoCharacters: CharArray = charArrayOf(
     'u', 'v', 'w', 'x', 'y', 'z',
 )
 
+@OptIn(ExperimentalUnsignedTypes::class)
 class LocalId private constructor(random: Random) {
 
     private val stringId: String
 
     init {
-        val bytes = random.nextBytes(CHARACTER_COUNT - 1)
+        val bytes = random.nextUBytes(CHARACTER_COUNT - 1)
         stringId = asBase62(bytes)
     }
 
@@ -44,11 +45,11 @@ class LocalId private constructor(random: Random) {
         }
     }
 
-    private fun asBase62(bytes: ByteArray): String {
+    private fun asBase62(bytes: UByteArray): String {
         val builder = StringBuilder()
         var sum = 0
         for (b in bytes) {
-            val max61 = b.toInt() and SixtyOne
+            val max61 = b.toInt() % SixtyTwo
             builder.append(sixtyTwoCharacters[max61])
             sum += max61
         }
