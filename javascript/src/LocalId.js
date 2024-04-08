@@ -4,14 +4,13 @@ function newId() {
     return asBase62(bytes);
 }
 
-const SIXTY_ONE = 61;
 const SIXTY_TWO = 62;
 
 function asBase62(bytes) {
     let stringId = ""
     let sum = 0;
     for (let i = 0; i < bytes.length; i += 1) {
-        let max61 = bytes[i] & SIXTY_ONE;
+        let max61 = bytes[i] % SIXTY_TWO;
         stringId += SIXTY_TWO_CHARS[max61];
         sum += max61
     }
