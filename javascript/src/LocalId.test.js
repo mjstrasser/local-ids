@@ -38,7 +38,7 @@ describe('isValid()', () => {
             path = require('path'),
             readline = require('readline');
 
-        const filePath = path.join(__dirname, '../valid-ids.txt');
+        const filePath = path.join(__dirname, '../../valid-ids.txt');
         const fileStream = fs.createReadStream(filePath);
         const rl = readline.createInterface({
             input: fileStream,
