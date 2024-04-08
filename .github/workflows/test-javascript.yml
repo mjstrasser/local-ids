@@ -26,4 +26,4 @@ jobs:
 
       - name: Jest test
         working-directory: ./javascript
-        run: npm test
+        run: npm install && npm test
