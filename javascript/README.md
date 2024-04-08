@@ -29,11 +29,11 @@ that validates `LocalId` string values at the edge is:
 ```javascript
 function handler(event) {
   const request = event.request;
-  const match = request.uri.match(LOCAL_ID_LAST);
+  const match = request.uri.match(/[^\/]+$/);
   if (match) {
     if (LocalId.isValid(match[0])) return request;
   }
   return RESPONSE_404;
 }
 ```
-The complete example is [here](./cloudfront-validation.js).
+The complete example is [here](./CloudFrontValidation.js).

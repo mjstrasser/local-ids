@@ -1,4 +1,4 @@
-const CfValidation = require('./cloudfront-validation');
+const CfValidation = require('./CloudFrontValidation');
 
 describe('handler()', () => {
     test('returns the request if a valid LocalId string is the last segment of the URI', () => {

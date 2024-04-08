@@ -1,4 +1,4 @@
-const LocalId = require('./local-id');
+const LocalId = require('./LocalId');
 
 
 describe('newId()', () => {

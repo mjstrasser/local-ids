@@ -1,4 +1,4 @@
-const LocalId = require('./local-id');
+const LocalId = require('./LocalId');
 
 const RESPONSE_404 = {
     statusCode: 404,
