@@ -28,12 +28,12 @@ that validates `LocalId` string values at the edge is:
 
 ```javascript
 function handler(event) {
-  const request = event.request;
-  const match = request.uri.match(/[^\/]+$/);
-  if (match) {
-    if (LocalId.isValid(match[0])) return request;
-  }
-  return RESPONSE_404;
+    const request = event.request;
+    const match = request.uri.match(/[^\/]+$/);
+    if (match) {
+        if (LocalId.isValid(match[0])) return request;
+    }
+    return {statusCode: 404, statusDescription: 'Not Found'};
 }
 ```
 The complete example is [here](src/CloudFrontValidation.js).
