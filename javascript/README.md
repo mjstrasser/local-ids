@@ -36,4 +36,4 @@ function handler(event) {
   return RESPONSE_404;
 }
 ```
-The complete example is [here](./CloudFrontValidation.js).
+The complete example is [here](src/CloudFrontValidation.js).
