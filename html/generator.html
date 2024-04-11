@@ -1,0 +1,52 @@
+<html lang="en">
+    <head>
+        <title>Generate local IDs</title>
+        <script type="application/javascript">
+            function newId() {
+                let bytes = new Uint8Array(15);
+                crypto.getRandomValues(bytes);
+                return asBase62(bytes);
+            }
+            const SIXTY_TWO = 62;
+            function asBase62(bytes) {
+                let stringId = ""
+                let sum = 0;
+                for (let i = 0; i < bytes.length; i += 1) {
+                    let max61 = bytes[i] % SIXTY_TWO;
+                    stringId += SIXTY_TWO_CHARS[max61];
+                    sum += max61
+                }
+                return stringId + SIXTY_TWO_CHARS[sum % SIXTY_TWO];
+            }
+            const SIXTY_TWO_CHARS = [
+                '0', '1', '2', '3', '4', '5', '6', '7',
+                '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
+                'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+                'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
+                'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd',
+                'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+                'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+                'u', 'v', 'w', 'x', 'y', 'z'
+            ];
+            function generateLocalIds() {
+                var ids = newId();
+                for (i = 0; i < 10; i++) {
+                    ids += "\n" + newId();
+                }
+                document.getElementById("generated-local-id").innerHTML = `<pre>${ids}</pre>`;
+            }
+        </script>
+        <style>
+            body {
+                font-family: sans-serif;
+                margin: 20px;
+            }
+        </style>
+    </head>
+    <body onload="generateLocalIds()">
+        <h1>Generate local IDs</h1>
+        <p>Ten <a href="https://github.com/mjstrasser/local-ids" target="_blank">Local ID</a> values.</p>
+        <div id="generated-local-id"></div>
+        <div><button onclick="generateLocalIds();">Generate more</button></div>
+    </body>
+</html>
