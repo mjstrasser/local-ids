@@ -2,10 +2,11 @@ package localids
 
 import io.kotest.assertions.fail
 import io.kotest.core.spec.style.DescribeSpec
-import io.kotest.data.forAll
 import io.kotest.matchers.comparables.shouldBeLessThan
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.shouldNotBe
+import io.kotest.property.Arb
+import io.kotest.property.arbitrary.long
+import io.kotest.property.forAll
 import kotlin.io.path.Path
 import kotlin.time.measureTimedValue
 
@@ -61,12 +62,12 @@ class LocalIdTest : DescribeSpec({
     describe("LocalId.hashCode()") {
         it("for two IDs with the same seed are equal") {
             forAll<Long> { seed ->
-                LocalId.newId(seed).hashCode() shouldBe LocalId.newId(seed).hashCode()
+                LocalId.newId(seed).hashCode() == LocalId.newId(seed).hashCode()
             }
         }
-        it("for to IDs with different seeds are not equal") {
-            forAll<Long, Long> { seed1, seed2 ->
-                LocalId.newId(seed1).hashCode() shouldNotBe LocalId.newId(seed2).hashCode()
+        it("for two IDs with different seeds are not equal") {
+            forAll(Arb.long(), Arb.long()) { seed1, seed2 ->
+                seed1 == seed2 || LocalId.newId(seed1).hashCode() != LocalId.newId(seed2).hashCode()
             }
         }
     }
@@ -74,12 +75,12 @@ class LocalIdTest : DescribeSpec({
     describe("LocalId.equals()") {
         it("for two IDs with the same seed are equal") {
             forAll<Long> { seed ->
-                LocalId.newId(seed) shouldBe LocalId.newId(seed)
+                LocalId.newId(seed) == LocalId.newId(seed)
             }
         }
-        it("for to IDs with different seeds are not equal") {
-            forAll<Long, Long> { seed1, seed2 ->
-                LocalId.newId(seed1) shouldNotBe LocalId.newId(seed2)
+        it("for two IDs with different seeds are not equal") {
+            forAll(Arb.long(), Arb.long()) { seed1, seed2 ->
+                seed1 == seed2 || LocalId.newId(seed1) != LocalId.newId(seed2)
             }
         }
     }
